@@ -1,0 +1,6 @@
+[submodule "KeyPadCss"]
+	path = KeyPadCss
+	url = https://github.com/JohnHansenCa/KeyPadCss
+[submodule "KeyPadJs"]
+	path = KeyPadJs
+	url = https://github.com/JohnHansenCa/KeyPadJs
