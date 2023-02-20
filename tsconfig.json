@@ -1,0 +1,14 @@
+{  
+    "compilerOptions": {  
+        "target": "ES2021",   
+        "sourceMap": true,  
+        "watch":true,
+        "rootDir": "Tscript",
+        "outDir": "src/scripts",
+    } ,
+    
+    "include": ["Tscript/*", "Tscript/**/*"], 
+    // "files": [
+    //             "node_modules/decimal.js/decimal.d.ts",
+    //             "node_modules/mathjs/types/index.d.ts"]
+}  
