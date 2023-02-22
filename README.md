@@ -1,7 +1,7 @@
 # CalculatorJs
 Calculator JS provides a traditional keypad, with unique features such as units, to provide calculator functionality primarily targeting mobile environments.
 
-[A complete turn-key calculator can be found here*](https://johnhansenca.github.io/calculatorJs/)
+[A complete turn-key calculator can be found here*](https://johnhansenca.github.io/CalculatorJs/)
 *Note current limitations below.
 
 ## About This Project ##
@@ -23,5 +23,8 @@ I had several goals for building this calculator project.
 
 ## Current Limitations ##
 Here are the current limitations.  All these limitations will be removed as the project continues.
-- It is not currently a progressive web app. You'll need to go to the [calculator link](https://johnhansenca.github.io/calculatorJs/) every time you want to use the app.
+- It is not currently a progressive web app. You'll need to go to the [calculator link](https://johnhansenca.github.io/CalculatorJs/) every time you want to use the app.
 - It is missing easy access to many Mathjs [constants, prefixes](https://mathjs.org/docs/datatypes/units.html) and [buit-in functions](https://mathjs.org/docs/expressions/syntax.html). They can be accessed by typing them directly into the calculator.
+
+# License #
+[GNU Affero General Public License v3.0](https://github.com/JohnHansenCa/CalculatorJs/blob/main/LICENSE)
