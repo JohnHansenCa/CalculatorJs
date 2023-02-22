@@ -1,4 +1,6 @@
-import * as kp from "../../KeyPadJs/src/scripts/kp.js";
+//import * as kp from "/root//src/scripts/kp.js" 
+//import * as kp from "../../KeyPadJs/src/scripts/kp.js"
+import * as kp from "../KeyPadJs/tscript/kp.js";
 import { getMathBaseUnits, getMathUnits } from "./mathUtil.js";
 // interface baseUnit{
 //     dimensions: [];

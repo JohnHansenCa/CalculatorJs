@@ -8,23 +8,23 @@ https://www.npmjs.com/package/eslint-plugin-html -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="./KeyPadCss/src/styles/keypad.css">
+    <link rel="stylesheet" href="./src/styles/calculator.css">
 
     <!-- FastActive allows a stylus on a touch device to properly invoke the
     CSS :active pseudo-class. -->
-    <script src="src/libs/FastActive.min.js" defer=""></script>
+    <!-- <script src="src/libs/FastActive.min.js" defer=""></script> -->
     <!-- Provides calculator functionality for the demo. See Mathjs.org for details. -->
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.5.0/math.js"></script> -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.5.1/math.min.js"></script>
-    <script type="module" src="src/scripts/calc.js"></script>
+    <!-- <script type="module" src="keypadjs/src/scripts/kp.js"></script> -->
+    <script type="module" src="./src/scripts/tscript/calc.js"></script>
     <style>
       body {
         overflow-x: hidden; /* Hide horizontal scrollbar */
         overflow-y: hidden; /* Hide vertical scrollbar */
       }
         .container{
-            display: flex;
-            flex-wrap: wrap; 
-            margin: 0 auto;
+            display:grid;
             max-width: 450px}
     </style>
   </head>
@@ -33,9 +33,9 @@ https://www.npmjs.com/package/eslint-plugin-html -->
       
     
     <div id="resultContainer" >
-      Calculator Status: <div id="calc-status" data-kp="display" style="border:solid; border-width:1px; border-color: fuchsia; height:1.2rem"></div>
-      Mathjs Result:<div id="calc-display" data-kp="display" style="border:solid; border-width:1px; border-color: blue">- </div>
-       KeyPad:<div id="key-bucket" data-kp="display" style="border:solid; border-width:1px; border-color: red; height:1.2rem"></div>
+       <div id="calc-status" data-kp="display" style="border:solid; border-width:1px; border-color: fuchsia; height:1.2rem"></div>
+      <div id="calc-display" class="calculator-display" data-kp="display" style="border:solid; border-width:1px; border-color: blue">- </div>
+       <div id="key-bucket" class="keybucket-display" data-kp="display" style="border:solid; border-width:1px; border-color: red; height:1.2rem"></div>
     </div>
     
     <div id="keypadcontainer" class="kp-light kp-alpha" style="display:flex; width:100%">
@@ -146,7 +146,6 @@ https://www.npmjs.com/package/eslint-plugin-html -->
   function resizeFunc(){
     referenceSize = document.getElementById("keyContainer4by5").clientWidth;
     setFontSize(container2, .1);
-    // TODO: add resize for units button
     setFontSize(document.getElementById("func-popup-container"), .05);
     setFontSize(document.getElementById("units-popup-container"), .05);
   }
@@ -155,5 +154,15 @@ https://www.npmjs.com/package/eslint-plugin-html -->
   let x = math.evaluate("8+5");
 console.log(x);
 </script>
+<script>
+    //TODO: improve PWA caching strategy. build manifest
+    // Check that service workers are supported
+    if ('serviceWorker' in navigator) {
+      // Use the window load event to keep the page load performant
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js');
+      });
+    }
+    </script>
   </body>
 </html>

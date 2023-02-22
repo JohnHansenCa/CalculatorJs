@@ -1,0 +1,31 @@
+.keybucket-display{
+    background-color: rgb(235, 230, 230);
+    color: black;
+    border-color: black;
+    border-width: 1px; 
+    border-style: solid; 
+    min-height: 1.1rem;
+  }
+  .previous-display{
+    background-color: rgb(235, 230, 230);
+    color: black;
+    border-color: black;
+    border-width: 1px; 
+    border-style: solid; 
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }
+  .calculator-display{
+    background-color: black;
+    font: 300;
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: gold;
+    border-color: black;
+    border-width: 1px; 
+    border-style: solid; 
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }

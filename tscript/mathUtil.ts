@@ -1,7 +1,7 @@
 import * as Mathjs from "./mathjs/mathjs"
 interface baseUnit{
     dimensions: [];
-    key: string;
+    key: string; 
 }
 interface special {
     /** Gives access to built-in unit definitions. */

@@ -3,9 +3,13 @@
         "target": "ES2021",   
         "sourceMap": true,  
         "watch":true,
-        "rootDir": "Tscript",
-        "outDir": "src/scripts",
+        "rootDirs": ["Tscript", "KeyPadJs/Tscript"],
+        "outDir": "src/scripts", 
+        "moduleResolution": "classic",
+        "baseUrl": "./",
+        //"paths": {"keypad":["keypadjs"]}
     } ,
+    
     
     "include": ["Tscript/*", "Tscript/**/*"], 
     // "files": [

@@ -1,3 +1,10 @@
 {
-    "workbench.colorTheme": "Abyss"
+    "workbench.colorTheme": "Abyss",
+    "liveServer.settings.https": {
+        "enable": true, //set it true to enable the feature.
+        "cert": "X:\\John_Documents\\OneDrive\\JS\\example.crt", //full path
+        "key": "X:\\John_Documents\\OneDrive\\JS\\example.key", //full path
+        "passphrase": "12345"
+    },
+    "liveServer.settings.port": 5501,
 }
