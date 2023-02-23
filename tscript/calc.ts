@@ -86,7 +86,7 @@ kp.DefaultListner.key = _keyHandler;
 //key_bucket.element.addEventListener('DOMSubtreeModified', calculate);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const observer = new MutationObserver((mutationlist, observ)=>{ calculate(observ)});
-observer.observe (key_bucket.element, { attributes: false, childList: true, subtree:false } );
+observer.observe (key_bucket.element, { attributes: true, childList: true, subtree:true, characterData:true} );
 //
 // var myElement = document.createElement("div");
 // myElement.innerText = "hello world";
