@@ -69,7 +69,8 @@ function calculate(e:unknown){
     }
     else{
         try{
-            const result = math.evaluate(_evaluateText).toString();
+            let result = math.evaluate(_evaluateText);
+            result = math.format(result, {precision: 14}); // get rid of ugly numbers like 12.0000000000001
             calcDisplay.displayText(result);
             
             statusDisplay.displayText("status:okay");
