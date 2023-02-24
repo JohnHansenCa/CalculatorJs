@@ -7,7 +7,8 @@
     border-style: solid; 
     font-size: 1.7rem;
     min-height: 4rem; 
-    max-height: 4rem;;
+    max-height: 4rem;
+    width:100%;
   }
   .previous-display{
     background-color: rgb(235, 230, 230);
@@ -15,6 +16,7 @@
     border-color: black;
     border-width: 1px; 
     border-style: solid; 
+    width:100%;
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
@@ -30,7 +32,16 @@
     border-color: black;
     border-width: 1px; 
     border-style: solid; 
+    width:100%;
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
+  }
+  .status-display{
+    border:solid; 
+    border-width:1px; 
+    border-color: fuchsia; 
+    height:1.2rem;
+    max-height: 1.2rem;
+    width:100%;
   }

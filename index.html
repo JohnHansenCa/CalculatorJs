@@ -12,7 +12,7 @@ https://www.npmjs.com/package/eslint-plugin-html -->
 
     <!-- FastActive allows a stylus on a touch device to properly invoke the
     CSS :active pseudo-class. -->
-    <script src="src/libs/FastActive.min.js" defer=""></script>
+    <script src="./KeyPadCss/src/libs/FastActive.min.js" defer=""></script>
     <!-- math.js provides calculator functionality for the application. See Mathjs.org for details. -->
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.5.0/math.js"></script> -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.5.1/math.min.js"></script>
@@ -32,24 +32,26 @@ https://www.npmjs.com/package/eslint-plugin-html -->
       
     
    <div id="resultContainer" >
-      <div id="calc-status" data-kp="display" style="border:solid; border-width:1px; border-color: fuchsia; height:1.2rem"></div>
+      <div id="calc-status" data-kp="display" class="status-display"></div>
      <div id="calc-display" class="calculator-display" data-kp="display" 
       style="border:solid; border-width:1px; border-color: blue">V.01.04 <span style="font-style:italic">Experimental</span></div>
       <div id="key-bucket" class="keybucket-display" data-kp="display" style="border:solid; border-width:1px; border-color: red; "
        contenteditable="true"></div>
     </div>
     
-   <div id="keypadcontainer" class="kp-light kp-alpha" style="display:flex; width:100%">
-   <div id="keyContainer4by5" class="kp-grid-container" style=" grid-template-columns:  1fr 1fr 1fr 1fr; font-size: 30px;  width:100%">
-    
-     <button id="kp-key-delete" class="kp-key kp-key-style kp-color kp-red" data-kp="key">␡</button>
-     <button id="func-key" class="kp-key kp-key-style kp-color kp-orange" data-kp="popup-key" data-kp-placement="bottom">𝑓x</button>
+   <div id="keypadcontainer" class="kp-light kp-alpha" style="display:flex; flex-direction:column; width:100%">
+    <div id="keyContainerSingleby5" class="kp-grid-container kp-lambda" style=" grid-template-columns:  1fr 1fr 1fr 1fr 1fr; font-size: 30px; width:100%">
+        <button id="kp-key-delete" class="kp-key kp-key-style kp-color kp-red" data-kp="key" style="max-height:2em; width:90%">␡</button>
+     <button id="func-key" class="kp-key kp-key-style kp-color kp-orange" data-kp="popup-key" data-kp-placement="bottom" style="max-height:2em; width:90%">𝑓x</button>
      <div id="func-popup-container" class="kp-flex-container"  style="display:none" >
        <div class="kp-list-container">
           <!-- style="align-self:unset; height:fit-content" -->
           <button  class="kp-key kp-key-style kp-color" data-kp="show-only-key" data-kp-target="log-btn-container1">trig</button>
           <button  class="kp-key kp-key-style kp-color" data-kp="show-only-key" data-kp-target="math-btn-container1">math</button>
-          <button  class="kp-key kp-key-style kp-color" data-kp="show-only-key" data-kp-target="">some stuff</button>
+          <button  class="kp-key kp-key-style kp-color kp-orange" data-kp="popup-key" >user 𝑓x</button>
+          <div class="kp-flex-container kp-yellow" style="display:none; width:80%">
+            User generated functions (eg: myfunc(x) = 6*x; or: myconst=7.21354;) will be displayed here in a future update.
+          </div>
         </div>
        <div class="kp-grid-container" style="grid-template-columns: 1fr">
          <div id="log-btn-container1" class="kp-grid-container" style="grid-template-columns: 1fr 1fr 1fr">
@@ -78,8 +80,11 @@ https://www.npmjs.com/package/eslint-plugin-html -->
           </div>
         </div>
       </div>
-     <button  class="kp-key kp-key-style kp-color kp-yellow" style="font-size:15px" data-kp="popup-key" data-kp-placement="bottom">Units</button>
+     <button  class="kp-key kp-key-style kp-color kp-orange" style=" max-height:2em; width:90%" data-kp="popup-key" data-kp-placement="bottom" 
+    >Units</button>
      <div id="units-popup-container" class ="kp-list-container" style="display:none">
+        
+        <button class="kp-key kp-key-style kp-color kp-blue" id="keep-open-btn">Keep Open</button>
         <button id="massbtn" class="kp-key kp-key-style kp-color kp-list-key" data-kp="popup-key" >mass</button>
        <div id="massdiv" class ="kp-list-container" style="display:none" >
             <button class="kp-key kp-key-style kp-color" data-kp="key">oz</button>
@@ -89,7 +94,7 @@ https://www.npmjs.com/package/eslint-plugin-html -->
           <button class="kp-key kp-key-style kp-color" data-kp="key">gram</button>
           <button class="kp-key kp-key-style kp-color" data-kp="key">tonne</button>
         </div>
-         <button id="lengthbtn"   class="kp-key kp-key-style kp-color kp-green kp-list-key" data-kp="popup-key">length</button>
+         <button id="lengthbtn"   class="kp-key kp-key-style kp-color  kp-list-key" data-kp="popup-key">length</button>
          <div id="lengthdiv" class ="kp-list-container" style="display:none">
             <button class="kp-key kp-key-style kp-color" data-kp="key">inch</button>
             <button class="kp-key kp-key-style kp-color" data-kp="key">ft</button>
@@ -115,7 +120,10 @@ https://www.npmjs.com/package/eslint-plugin-html -->
           <button id="tempbtn" class="kp-key kp-key-style kp-color kp-list-key" data-kp="key"> to </button>
           <button id="tempbtn" class="kp-key kp-key-style kp-color kp-list-key" data-kp="key"> in </button>
     </div>
-      <button id="kp-key-backspace" class="kp-key kp-key-style kp-color kp-blue" data-kp="key">⌫</button>
+        <button class="kp-key kp-key-style kp-color kp-yellow" style=" max-height:2em; width:90%">TBD</button>
+      <button id="kp-key-backspace" class="kp-key kp-key-style kp-color kp-blue" data-kp="key" style=" max-height:2em; width:90%">⌫</button>
+        </div>
+   <div id="keyContainer4by5" class="kp-grid-container" style=" grid-template-columns:  1fr 1fr 1fr 1fr; font-size: 30px;  width:100%">
      
      <button  class="kp-key kp-key-style kp-color" data-kp="key">(</button>
      <button  class="kp-key kp-key-style kp-color" data-kp="key">)</button>
@@ -163,6 +171,8 @@ https://www.npmjs.com/package/eslint-plugin-html -->
     setFontSize(container2, .1);
     setFontSize(document.getElementById("func-popup-container"), .05);
     setFontSize(document.getElementById("units-popup-container"), .05);
+    
+    setFontSize(document.getElementById("keyContainerSingleby5"), .06);
   }
   window.addEventListener("resize", resizeFunc);
   resizeFunc();
