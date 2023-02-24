@@ -19,6 +19,13 @@ import { getMathBaseUnits, getMathUnits, baseUnit, special } from "./mathUtil.js
 //     }
 // }
 let addSpace="";
+//https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types
+declare const math:Mathjs.MathJsStatic & special; 
+const keyBucket = kp.Display.getInstance("key-bucket");  
+let isFirst = true;
+const calcDisplay = kp.Display.getInstance("calc-display")  ;
+const statusDisplay = kp.Display.getInstance("calc-status");
+keyBucket.displayText("JS release 2023-02-24 1.0")
 /**
  * TODO: fix @see comment below
  * The function below will become the {@link kp.DefaultListner.key} 
@@ -27,39 +34,39 @@ let addSpace="";
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const _keyHandler:kp.KeyListener = function(keyValue:string, e:HTMLElement):void{
-    const _current = kp.Display.getInstance("key-bucket");
-    if(_current != null) // TODO: get rid of statement when empty is added to Display
+    //const keyBucket = kp.Display.getInstance("key-bucket");
+    if(isFirst){
+        isFirst = false;
+        keyBucket.clear();
+    }
+    if(keyBucket != null) // TODO: get rid of statement when empty is added to Display
     {
         let char = keyValue;
         if(char === "\b" || char == "⌫")
-        _current.displayText(_current.text.slice(0, -1));
+        keyBucket.displayText(keyBucket.text.slice(0, -1));
         else if (char === "␡")
-        _current.clear();
+        keyBucket.clear();
         else if (char === "to"){
           char = " "+ char + " ";
-          _current.displayText(_current.text + char);
+          keyBucket.displayText(keyBucket.text + char);
           addSpace=" ";
         }
         else if (char === "in"){
           char = " "+ char + " ";
-          _current.displayText(_current.text + char);
+          keyBucket.displayText(keyBucket.text + char);
           addSpace=" ";
         }
         else{
             
-            _current.displayText(_current.text + addSpace + char);
+            keyBucket.displayText(keyBucket.text + addSpace + char);
             addSpace = "";
         }
     }
 }
-//https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types
-declare const math:Mathjs.MathJsStatic & special; 
-const key_bucket = kp.Display.getInstance("key-bucket");  
-const calcDisplay = kp.Display.getInstance("calc-display")  ;
-const statusDisplay = kp.Display.getInstance("calc-status");
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function calculate(e:unknown){
-    const _evaluateText = key_bucket.text.replaceAll("×","*").replaceAll("÷","/");
+    const _evaluateText = keyBucket.text.replaceAll("×","*").replaceAll("÷","/");
     //let result = math.evaluate(_evaluateText);
     //calcDisplay.displayText( result);
     
@@ -87,7 +94,7 @@ kp.DefaultListner.key = _keyHandler;
 //key_bucket.element.addEventListener('DOMSubtreeModified', calculate);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const observer = new MutationObserver((mutationlist, observ)=>{ calculate(observ)});
-observer.observe (key_bucket.element, { attributes: true, childList: true, subtree:true, characterData:true} );
+observer.observe (keyBucket.element, { attributes: true, childList: true, subtree:true, characterData:true} );
 //
 // var myElement = document.createElement("div");
 // myElement.innerText = "hello world";
