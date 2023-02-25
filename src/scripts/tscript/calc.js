@@ -20,7 +20,9 @@ const keyBucket = kp.Display.getInstance("key-bucket");
 let isFirst = true;
 const calcDisplay = kp.Display.getInstance("calc-display");
 const statusDisplay = kp.Display.getInstance("calc-status");
-keyBucket.displayText("JS release 2023-02-24 1.0");
+const jsReleaseMsg = "JS release 2023-02-25 1.0";
+keyBucket.displayText(jsReleaseMsg);
+document.getElementById("javascript-version").innerText = jsReleaseMsg;
 /**
  * TODO: fix @see comment below
  * The function below will become the {@link kp.DefaultListner.key}
@@ -86,6 +88,12 @@ kp.DefaultListner.key = _keyHandler;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const observer = new MutationObserver((mutationlist, observ) => { calculate(observ); });
 observer.observe(keyBucket.element, { attributes: true, childList: true, subtree: true, characterData: true });
+// display about message on start up
+window.addEventListener("load", function () {
+    const settingBtn = document.getElementById('settings-btn');
+    document.getElementById('settings-btn').click();
+    document.getElementById('about-btn').click();
+});
 //
 // var myElement = document.createElement("div");
 // myElement.innerText = "hello world";

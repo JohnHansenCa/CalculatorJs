@@ -9,6 +9,8 @@ https://www.npmjs.com/package/eslint-plugin-html -->
 
     <link rel="stylesheet" href="./KeyPadCss/src/styles/keypad.css">
     <link rel="stylesheet" href="./src/styles/calculator.css">
+    <link rel="stylesheet" href="./src/styles/slider.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <!-- FastActive allows a stylus on a touch device to properly invoke the
     CSS :active pseudo-class. -->
@@ -28,18 +30,51 @@ https://www.npmjs.com/package/eslint-plugin-html -->
     </style>
   </head>
   <body data-kp-select="kp-select">
-   <div class="container" >
+   <div id="calculator-container" class="kp-alpha kp-light container" >
       
-    
+    <div id="top-line-container" class="kp-tau" 
+    style="background-color:black; display:grid; grid-template-columns:  1fr 1fr 1fr 1fr 1fr 1fr 1fr;  width:100%;min-height:fit-content; border:solid; border-width:1px; border-color: green;">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <button class ="kp-key kp-key-style kp-color kp-black" data-kp="popup-key" data-kp-placement="bottom">
+            <!-- <span class="material-symbols-outlined"> -->
+                history
+                <!-- </span> -->
+            </button>
+        <div id="history-message" class="kp-flex-container kp-key-style kp-color kp-orange" style="display:none; width:fit-content; line-height:unset">
+            <span style="margin:5px">History button will display past calculations.<br>
+            Feature to be available in future update.</span>
+            </div>
+        <label class=" switch" style="align-self:center; display:flex">
+            <input type = 'checkbox'>
+            <span class = 'slider round'></span>
+        </label>
+        
+        <button id="settings-btn" class="kp-key kp-key-style kp-color kp-black" data-kp="popup-key" data-kp-placement="bottom">&#x22EE;</button>
+        <div  class="kp-list-container" style="display:none">
+            <button id="about-btn" class="kp-key kp-key-style kp-color" data-kp="popup-key" data-kp-placement="left">about</button>
+            <div id="about-message" class="kp-flex-container kp-key-style kp-color kp-yellow" style="flex-direction:column; display:none; line-height:unset "
+                data-popper-placement="left">
+                <span id="version-msg">Version 01.05 Experimental</span>
+                <span id="javascript-version">test</span>
+                <a href="https://github.com/JohnHansenCa/CalculatorJs/blob/main/README.md" target="_blank">Visit Calculator JS on Github</a>
+                <a href="https://github.com/JohnHansenCa/CalculatorJs/blob/main/LICENSE" target="_blank">Licensed under GNU Affero GPL v3.0</a>
+                <button id="about-message-close" class="kp-key kp-key-style kp-color" style="width:fit-content">Close</button>
+            </div>
+        </div>
+        
+    </div>
    <div id="resultContainer" >
       <div id="calc-status" data-kp="display" class="status-display"></div>
      <div id="calc-display" class="calculator-display" data-kp="display" 
-      style="border:solid; border-width:1px; border-color: blue">V.01.04 <span style="font-style:italic">Experimental</span></div>
+      style="border:solid; border-width:1px; border-color: blue">V.01.05 <span style="font-style:italic">Experimental</span></div>
       <div id="key-bucket" class="keybucket-display" data-kp="display" style="border:solid; border-width:1px; border-color: red; "
        contenteditable="true"></div>
     </div>
     
-   <div id="keypadcontainer" class="kp-light kp-alpha" style="display:flex; flex-direction:column; width:100%">
+   <div id="keypadcontainer"  style="display:flex; flex-direction:column; width:100%">
     <div id="keyContainerSingleby5" class="kp-grid-container kp-lambda" style=" grid-template-columns:  1fr 1fr 1fr 1fr 1fr; font-size: 30px; width:100%">
         <button id="kp-key-delete" class="kp-key kp-key-style kp-color kp-red" data-kp="key" style="max-height:2em; width:90%">␡</button>
      <button id="func-key" class="kp-key kp-key-style kp-color kp-orange" data-kp="popup-key" data-kp-placement="bottom" style="max-height:2em; width:90%">𝑓x</button>
@@ -163,6 +198,10 @@ https://www.npmjs.com/package/eslint-plugin-html -->
     let size = (referenceSize*multipler).toString();
     containerElement.style.fontSize = `${size}px`;
   }
+  function setWidth(containerElement, multipler){
+    let size = (referenceSize*multipler).toString();
+    containerElement.style.width = `${size}px`;
+  }
   // TODO: Develop a better solution
   // There is probably a better solution
   // https://css-tricks.com/fitting-text-to-a-container/
@@ -173,13 +212,21 @@ https://www.npmjs.com/package/eslint-plugin-html -->
     setFontSize(document.getElementById("units-popup-container"), .05);
     
     setFontSize(document.getElementById("keyContainerSingleby5"), .06);
+    setFontSize(document.getElementById("version-msg"), .06);
+    setFontSize(document.getElementById("javascript-version"), .06);
+
+    setWidth(document.getElementById("history-message"), .95);
+    setFontSize(document.getElementById("history-message"), .052);
+
+    setWidth(document.getElementById("about-message"), .75);
+    setFontSize(document.getElementById("about-message-close"), .06);
   }
   window.addEventListener("resize", resizeFunc);
   resizeFunc();
   let x = math.evaluate("8+5");
 console.log(x);
 </script>
-<script>
+<!-- <script>
     //TODO: improve PWA caching strategy. build manifest
     // Check that service workers are supported
     if ('serviceWorker' in navigator) {
@@ -188,6 +235,6 @@ console.log(x);
         navigator.serviceWorker.register('sw.js');
       });
     }
-    </script>
+    </script> -->
   </body>
 </html>
