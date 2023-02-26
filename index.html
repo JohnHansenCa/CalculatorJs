@@ -29,8 +29,8 @@ https://www.npmjs.com/package/eslint-plugin-html -->
             max-width: 450px}
     </style>
   </head>
-  <body data-kp-select="kp-select">
-   <div id="calculator-container" class="kp-alpha kp-light container" >
+  <body data-kp-select="kp-select" style="background-color:black; margin-top:0px">
+   <div id="calculator-container" class="kp-alpha kp-light container" style="background-color:white" >
       
     <div id="top-line-container" class="kp-tau" 
     style="background-color:black; display:grid; grid-template-columns:  1fr 1fr 1fr 1fr 1fr 1fr 1fr;  width:100%;min-height:fit-content; border:solid; border-width:1px; border-color: green;">
@@ -39,16 +39,16 @@ https://www.npmjs.com/package/eslint-plugin-html -->
         <div></div>
         <div></div>
         <button class ="kp-key kp-key-style kp-color kp-black" data-kp="popup-key" data-kp-placement="bottom">
-            <!-- <span class="material-symbols-outlined"> -->
+            <span class="material-symbols-outlined">
                 history
-                <!-- </span> -->
+                </span>
             </button>
         <div id="history-message" class="kp-flex-container kp-key-style kp-color kp-orange" style="display:none; width:fit-content; line-height:unset">
             <span style="margin:5px">History button will display past calculations.<br>
             Feature to be available in future update.</span>
             </div>
-        <label class=" switch" style="align-self:center; display:flex">
-            <input type = 'checkbox'>
+        <label class="switch" style="align-self:center; display:flex">
+            <input id="dark-light-slider" type = 'checkbox'>
             <span class = 'slider round'></span>
         </label>
         
@@ -57,7 +57,7 @@ https://www.npmjs.com/package/eslint-plugin-html -->
             <button id="about-btn" class="kp-key kp-key-style kp-color" data-kp="popup-key" data-kp-placement="left">about</button>
             <div id="about-message" class="kp-flex-container kp-key-style kp-color kp-yellow" style="flex-direction:column; display:none; line-height:unset "
                 data-popper-placement="left">
-                <span id="version-msg">Version 01.05 Experimental</span>
+                <span id="version-msg">Version 0.1.06<br><span style="font-style:italic">Experimental</span></span>
                 <span id="javascript-version">test</span>
                 <a href="https://github.com/JohnHansenCa/CalculatorJs/blob/main/README.md" target="_blank">Visit Calculator JS on Github</a>
                 <a href="https://github.com/JohnHansenCa/CalculatorJs/blob/main/LICENSE" target="_blank">Licensed under GNU Affero GPL v3.0</a>
@@ -69,7 +69,7 @@ https://www.npmjs.com/package/eslint-plugin-html -->
    <div id="resultContainer" >
       <div id="calc-status" data-kp="display" class="status-display"></div>
      <div id="calc-display" class="calculator-display" data-kp="display" 
-      style="border:solid; border-width:1px; border-color: blue">V.01.05 <span style="font-style:italic">Experimental</span></div>
+      style="border:solid; border-width:1px; border-color: blue"> </div>
       <div id="key-bucket" class="keybucket-display" data-kp="display" style="border:solid; border-width:1px; border-color: red; "
        contenteditable="true"></div>
     </div>

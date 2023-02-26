@@ -25,9 +25,24 @@ const keyBucket = kp.Display.getInstance("key-bucket");
 let isFirst = true;
 const calcDisplay = kp.Display.getInstance("calc-display")  ;
 const statusDisplay = kp.Display.getInstance("calc-status");
-const jsReleaseMsg = "JS release 2023-02-25 1.0"
-keyBucket.displayText(jsReleaseMsg);
+const jsReleaseMsg = "JS release 2023-02-26 0.3"
+//keyBucket.displayText(jsReleaseMsg);
 document.getElementById("javascript-version").innerText = jsReleaseMsg;
+document.getElementById("dark-light-slider").onchange = function(event: Event){
+    let target:HTMLInputElement = event.target as any;
+    const container = document.getElementById("calculator-container");
+    if(target.checked){
+        // dark
+        container.classList.remove("kp-light");
+        container.classList.add("kp-dark");
+    }
+    else{
+        // light
+        container.classList.remove("kp-dark");
+        container.classList.add("kp-light");
+    }
+    console.log(target);
+}
 /**
  * TODO: fix @see comment below
  * The function below will become the {@link kp.DefaultListner.key} 
