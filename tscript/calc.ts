@@ -25,7 +25,7 @@ const keyBucket = kp.Display.getInstance("key-bucket");
 let isFirst = true;
 const calcDisplay = kp.Display.getInstance("calc-display")  ;
 const statusDisplay = kp.Display.getInstance("calc-status");
-const jsReleaseMsg = "JS release 2023-02-26 0.4"
+const jsReleaseMsg = "JS release 2023-02-26 0.5"
 //keyBucket.displayText(jsReleaseMsg);
 document.getElementById("javascript-version").innerText = jsReleaseMsg;
 document.getElementById("dark-light-slider").onchange = function(event: Event){
@@ -56,7 +56,7 @@ const _keyHandler:kp.KeyListener = function(keyValue:string, e:HTMLElement):void
     //const keyBucket = kp.Display.getInstance("key-bucket");
     if(isFirst){
         isFirst = false;
-        keyBucket.clear();
+        //keyBucket.clear();
     }
     if(keyBucket != null) // TODO: get rid of statement when empty is added to Display
     {
@@ -81,6 +81,7 @@ const _keyHandler:kp.KeyListener = function(keyValue:string, e:HTMLElement):void
             addSpace = "";
         }
     }
+    localStorage.setItem("keyBucket", keyBucket.element.innerText);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -119,6 +120,10 @@ window.addEventListener("load", function(){
     const settingBtn = document.getElementById('settings-btn');
     document.getElementById('settings-btn').click();
     document.getElementById('about-btn').click();
+
+    
+    const stor = localStorage.getItem("keyBucket");
+    keyBucket.displayText(localStorage.getItem("keyBucket"));
 });
 //
 // var myElement = document.createElement("div");

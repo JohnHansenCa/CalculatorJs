@@ -56,7 +56,8 @@ class Display {
      * @returns
      */
     displayText(text) {
-        this._element.innerText = text;
+        if (Util.isValidObject(text))
+            this._element.innerText = text;
         return this;
     }
     addText(text) {
