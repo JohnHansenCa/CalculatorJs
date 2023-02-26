@@ -75,13 +75,13 @@ const _keyHandler = function (keyValue, e) {
             addSpace = "";
         }
     }
-    localStorage.setItem("keyBucket", keyBucket.element.innerText);
 };
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function calculate(e) {
     const _evaluateText = keyBucket.text.replaceAll("×", "*").replaceAll("÷", "/");
     //let result = math.evaluate(_evaluateText);
     //calcDisplay.displayText( result);
+    localStorage.setItem("keyBucket", keyBucket.element.innerText);
     if (_evaluateText == "") {
         calcDisplay.displayText("0");
         statusDisplay.displayText("status:okay");
@@ -113,6 +113,7 @@ window.addEventListener("load", function () {
     document.getElementById('about-btn').click();
     const stor = localStorage.getItem("keyBucket");
     keyBucket.displayText(localStorage.getItem("keyBucket"));
+    calculate(null); // make sure zero is displayed
 });
 //
 // var myElement = document.createElement("div");

@@ -81,7 +81,7 @@ const _keyHandler:kp.KeyListener = function(keyValue:string, e:HTMLElement):void
             addSpace = "";
         }
     }
-    localStorage.setItem("keyBucket", keyBucket.element.innerText);
+   
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -89,7 +89,7 @@ function calculate(e:unknown){
     const _evaluateText = keyBucket.text.replaceAll("×","*").replaceAll("÷","/");
     //let result = math.evaluate(_evaluateText);
     //calcDisplay.displayText( result);
-    
+    localStorage.setItem("keyBucket", keyBucket.element.innerText);
     if(_evaluateText == ""){
         calcDisplay.displayText("0");
         statusDisplay.displayText("status:okay");
@@ -124,6 +124,7 @@ window.addEventListener("load", function(){
     
     const stor = localStorage.getItem("keyBucket");
     keyBucket.displayText(localStorage.getItem("keyBucket"));
+    calculate(null); // make sure zero is displayed
 });
 //
 // var myElement = document.createElement("div");
