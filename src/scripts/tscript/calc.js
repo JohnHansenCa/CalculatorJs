@@ -20,7 +20,7 @@ const keyBucket = kp.Display.getInstance("key-bucket");
 let isFirst = true;
 const calcDisplay = kp.Display.getInstance("calc-display");
 const statusDisplay = kp.Display.getInstance("calc-status");
-const jsReleaseMsg = "JS release 2023-02-26 0.3";
+const jsReleaseMsg = "JS release 2023-02-26 0.4";
 //keyBucket.displayText(jsReleaseMsg);
 document.getElementById("javascript-version").innerText = jsReleaseMsg;
 document.getElementById("dark-light-slider").onchange = function (event) {
@@ -30,11 +30,13 @@ document.getElementById("dark-light-slider").onchange = function (event) {
         // dark
         container.classList.remove("kp-light");
         container.classList.add("kp-dark");
+        document.body.style.backgroundColor = "black";
     }
     else {
         // light
         container.classList.remove("kp-dark");
         container.classList.add("kp-light");
+        document.body.style.backgroundColor = "white";
     }
     console.log(target);
 };

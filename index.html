@@ -29,7 +29,7 @@ https://www.npmjs.com/package/eslint-plugin-html -->
             max-width: 450px}
     </style>
   </head>
-  <body data-kp-select="kp-select" style="background-color:black; margin-top:0px">
+  <body data-kp-select="kp-select" style=" margin-top:0px">
    <div id="calculator-container" class="kp-alpha kp-light container" style="background-color:white" >
       
     <div id="top-line-container" class="kp-tau" 
@@ -57,7 +57,7 @@ https://www.npmjs.com/package/eslint-plugin-html -->
             <button id="about-btn" class="kp-key kp-key-style kp-color" data-kp="popup-key" data-kp-placement="left">about</button>
             <div id="about-message" class="kp-flex-container kp-key-style kp-color kp-yellow" style="flex-direction:column; display:none; line-height:unset "
                 data-popper-placement="left">
-                <span id="version-msg">Version 0.1.06<br><span style="font-style:italic">Experimental</span></span>
+                <span id="version-msg">Version 0.1.07<br><span style="font-style:italic">Experimental</span></span>
                 <span id="javascript-version">test</span>
                 <a href="https://github.com/JohnHansenCa/CalculatorJs/blob/main/README.md" target="_blank">Visit Calculator JS on Github</a>
                 <a href="https://github.com/JohnHansenCa/CalculatorJs/blob/main/LICENSE" target="_blank">Licensed under GNU Affero GPL v3.0</a>
@@ -115,37 +115,117 @@ https://www.npmjs.com/package/eslint-plugin-html -->
           </div>
         </div>
       </div>
-     <button  class="kp-key kp-key-style kp-color kp-orange" style=" max-height:2em; width:90%" data-kp="popup-key" data-kp-placement="bottom" 
+     <button  class="kp-key kp-key-style kp-color kp-orange" style=" max-height:2em; width:90%" data-kp="popup-key" data-kp-placement="right-end" 
     >Units</button>
      <div id="units-popup-container" class ="kp-list-container" style="display:none">
         
         <button class="kp-key kp-key-style kp-color kp-blue" id="keep-open-btn">Keep Open</button>
-        <button id="massbtn" class="kp-key kp-key-style kp-color kp-list-key" data-kp="popup-key" >mass</button>
-       <div id="massdiv" class ="kp-list-container" style="display:none" >
+        <button id="massbtn" class="kp-key kp-key-style kp-color kp-list-key" data-kp="popup-key" data-kp-placement="left-start">mass</button>
+        <div id="mass-container" class="kp-flex-container" style="display:none" >
+            <div id="massdivmetric" class ="kp-list-container"  >
+                <button class="kp-key kp-key-style kp-color" data-kp="key">pg</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">ng</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">ug</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">gram</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">kg</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">Mg</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">Gg</button>
+                </div>
+            <div id="massdiv" class ="kp-list-container"  >
+            <button class="kp-key kp-key-style kp-color" data-kp="key">gr</button>
             <button class="kp-key kp-key-style kp-color" data-kp="key">oz</button>
-          <button class="kp-key kp-key-style kp-color" data-kp="key">lb</button>
-          <button class="kp-key kp-key-style kp-color" data-kp="key">stone</button>
-          <button class="kp-key kp-key-style kp-color" data-kp="key">kg</button>
-          <button class="kp-key kp-key-style kp-color" data-kp="key">gram</button>
-          <button class="kp-key kp-key-style kp-color" data-kp="key">tonne</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="key">lb</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="key">stone</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="key">tonne</button>
+            </div>
         </div>
-         <button id="lengthbtn"   class="kp-key kp-key-style kp-color  kp-list-key" data-kp="popup-key">length</button>
-         <div id="lengthdiv" class ="kp-list-container" style="display:none">
-            <button class="kp-key kp-key-style kp-color" data-kp="key">inch</button>
-            <button class="kp-key kp-key-style kp-color" data-kp="key">ft</button>
-            <button class="kp-key kp-key-style kp-color" data-kp="key">mile</button>
-            <button class="kp-key kp-key-style kp-color" data-kp="key">m</button>
-            <button class="kp-key kp-key-style kp-color" data-kp="key">km</button>
-          </div>
-          <button id="timebtn" class="kp-key kp-key-style kp-color kp-list-key" data-kp="popup-key">time</button>
-         <div id="timediv" class ="kp-list-container" style="display:none">
-            <button class="kp-key kp-key-style kp-color" data-kp="key">second</button>
-            <button class="kp-key kp-key-style kp-color" data-kp="key">minute</button>
-            <button class="kp-key kp-key-style kp-color" data-kp="key">hour</button>
-            <button class="kp-key kp-key-style kp-color" data-kp="key">day</button>
-            <button class="kp-key kp-key-style kp-color" data-kp="key">week</button>
-            <button class="kp-key kp-key-style kp-color" data-kp="key">year</button>
-          </div>
+         <button id="lengthbtn"   class="kp-key kp-key-style kp-color  kp-list-key" data-kp="popup-key" data-kp-placement="left-start">length</button>
+         <div id="length-container" class="kp-flex-container" style="display:none" >
+            <div id="lengthdivmetric" class ="kp-list-container" >
+                <button class="kp-key kp-key-style kp-color" data-kp="key">um</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">mm</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">cm</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">m</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">km</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">Mm</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">Gm</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">Tm</button>
+            </div>
+            <div id="lengthdiv" class ="kp-list-container" >
+                <button class="kp-key kp-key-style kp-color" data-kp="key">angstrom</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">inch</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">ft</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">yd</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">rd</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">chain</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">mile</button>
+                </div>
+            
+            <!-- <div id="lengthdiva" class ="kp-list-container" >
+                not working
+                <button class="kp-key kp-key-style kp-color" >parsec</button>
+                <button class="kp-key kp-key-style kp-color" >au</button>
+                <button class="kp-key kp-key-style kp-color" >lightyear</button>
+
+            </div> -->
+        </div>
+        <button id="volumebtn"   class="kp-key kp-key-style kp-color  kp-list-key" data-kp="popup-key" data-kp-placement="left-start">volume</button>
+         <div id="volume-container" class="kp-flex-container" style="display:none" >
+            <div id="volumdivmetric" class ="kp-list-container" >
+                <button class="kp-key kp-key-style kp-color" data-kp="key">ul</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">ml</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">cl</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">l</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">kl</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">Ml</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">Gl</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">Tl</button>
+            </div>
+            <div id="volumediv" class ="kp-list-container" >
+                <button class="kp-key kp-key-style kp-color" data-kp="key">cc</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">cuin</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">cuft</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">cuyd</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">teaspoon</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">tablespoon</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">cup</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">pint</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">qt</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">gallon</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">obl</button>
+            </div>
+        </div>
+
+            
+            <!-- <div id="lengthdiva" class ="kp-list-container" >
+                not working
+                <button class="kp-key kp-key-style kp-color" >parsec</button>
+                <button class="kp-key kp-key-style kp-color" >au</button>
+                <button class="kp-key kp-key-style kp-color" >lightyear</button>
+
+            </div> -->
+        
+          <button id="timebtn" class="kp-key kp-key-style kp-color kp-list-key" data-kp="popup-key" data-kp-placement="left-start">time</button>
+          <div id="time-container" class="kp-flex-container" style="display:none" >
+            <div id="timediv" class ="kp-list-container">
+                <button class="kp-key kp-key-style kp-color" data-kp="key">second</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">minute</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">hour</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">day</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">week</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">year</button>
+            </div>
+            <div id="timedivmetric" class ="kp-list-container" >
+                <button class="kp-key kp-key-style kp-color" data-kp="key">fs</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">ps</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">ns</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">us</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">ns</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">s</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">ks</button>
+                <button class="kp-key kp-key-style kp-color" data-kp="key">Ms</button>
+            </div>
+        </div>
           <button id="tempbtn" class="kp-key kp-key-style kp-color kp-list-key" data-kp="popup-key">temperature</button>
          <div id="tempdiv" class ="kp-list-container" style="display:none">
             <button class="kp-key kp-key-style kp-color" data-kp="key">fahrenheit</button>
