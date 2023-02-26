@@ -216,11 +216,11 @@ https://www.npmjs.com/package/eslint-plugin-html -->
                 <button class="kp-key kp-key-style kp-color" data-kp="key">year</button>
             </div>
             <div id="timedivmetric" class ="kp-list-container" >
+                <button class="kp-key kp-key-style kp-color" data-kp="key">as</button>
                 <button class="kp-key kp-key-style kp-color" data-kp="key">fs</button>
                 <button class="kp-key kp-key-style kp-color" data-kp="key">ps</button>
                 <button class="kp-key kp-key-style kp-color" data-kp="key">ns</button>
                 <button class="kp-key kp-key-style kp-color" data-kp="key">us</button>
-                <button class="kp-key kp-key-style kp-color" data-kp="key">ns</button>
                 <button class="kp-key kp-key-style kp-color" data-kp="key">s</button>
                 <button class="kp-key kp-key-style kp-color" data-kp="key">ks</button>
                 <button class="kp-key kp-key-style kp-color" data-kp="key">Ms</button>
@@ -232,17 +232,56 @@ https://www.npmjs.com/package/eslint-plugin-html -->
             <button class="kp-key kp-key-style kp-color" data-kp="key">celsius</button>
             <button class="kp-key kp-key-style kp-color" data-kp="key">kelvin</button>
           </div>
+          <button id="powerbtn" class="kp-key kp-key-style kp-color kp-list-key" data-kp="popup-key">power</button>
+          <div id="powerdiv" class ="kp-list-container" style="display:none">
+            <button class="kp-key kp-key-style kp-color" data-kp="key">W</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="key">hp</button>
+          </div>
+          <button id="energybtn" class="kp-key kp-key-style kp-color kp-list-key" data-kp="popup-key">energy</button>
+          <div id="energydiv" class ="kp-list-container" style="display:none">
+            <button class="kp-key kp-key-style kp-color" data-kp="key">BTU</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="key">J</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="key">erg</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="key">Wh</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="key">eV</button>
+          </div>
+          <button id="electricitybtn" class="kp-key kp-key-style kp-color kp-list-key" data-kp="popup-key">electricty</button>
+          <div id="energydiv" class ="kp-list-container" style="display:none">
+            <button class="kp-key kp-key-style kp-color" data-kp="key">A</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="key">C</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="key">W</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="key">V</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="key">F</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="key">ohm</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="key">Wb</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="key">T</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="key">H</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="key">S</button>
+          </div>
           <button id="tempbtn" class="kp-key kp-key-style kp-color kp-list-key" data-kp="key"> to </button>
-          <button id="tempbtn" class="kp-key kp-key-style kp-color kp-list-key" data-kp="key"> in </button>
     </div>
         <button class="kp-key kp-key-style kp-color kp-yellow" style=" max-height:2em; width:90%">TBD</button>
       <button id="kp-key-backspace" class="kp-key kp-key-style kp-color kp-blue" data-kp="key" style=" max-height:2em; width:90%">⌫</button>
         </div>
-   <div id="keyContainer4by5" class="kp-grid-container" style=" grid-template-columns:  1fr 1fr 1fr 1fr; font-size: 30px;  width:100%">
+    <!-- 
+        *** Main Calculator Keys
+     -->
+    <div id="main-key-container" class="kp-flex-container" style="width:100%">
+        <!-- <div id="extra-keys-container" class="kp-grid-container" style=" grid-template-columns:  1fr  ; font-size: 30px; width:20% "> -->
+            <div id="extra-keys-container" class="kp-list-container kp-lambda" > 
+            <button  class="kp-key kp-key-style kp-color" data-kp="key" style="justify-content:center">%</button>
+            <button  class="kp-key kp-key-style kp-color" data-kp="key"  style="justify-content:center">1/x</button>
+            <button  class="kp-key kp-key-style kp-color" data-kp="key" style="justify-content:center">^2</button>
+            <button  class="kp-key kp-key-style kp-color" data-kp="key" style="justify-content:center">^</button>
+            <button  class="kp-key kp-key-style kp-color" >user01</button>
+            <button  class="kp-key kp-key-style kp-color" >user02</button>
+            <button  class="kp-key kp-key-style kp-color" >user03</button>
+        </div>
+   <div id="keyContainer4by5" class="kp-grid-container" style=" grid-template-columns:  1fr 1fr 1fr 1fr ; font-size: 30px; width:80%">
      
-     <button  class="kp-key kp-key-style kp-color" data-kp="key">(</button>
+     <button  class="kp-key kp-key-style kp-color" data-kp="key" >(</button>
      <button  class="kp-key kp-key-style kp-color" data-kp="key">)</button>
-     <button  class="kp-key kp-key-style kp-color" data-kp="key">%</button>
+     <button  class="kp-key kp-key-style kp-color" data-kp="key">e</button>
      <button  class="kp-key kp-key-style kp-color" data-kp="key">÷</button>
 
      <button  class="kp-key kp-key-style kp-color" data-kp="key">7</button>
@@ -265,6 +304,7 @@ https://www.npmjs.com/package/eslint-plugin-html -->
      <button id="kp-key-equal" class="kp-key kp-key-style kp-color kp-blue">=</button>
      <button id="kp-key-carriage-return" class="kp-key kp-key-style kp-color kp-green">⏎</button>
     </div>
+    
 </div>
     </div>
 
@@ -286,12 +326,14 @@ https://www.npmjs.com/package/eslint-plugin-html -->
   // There is probably a better solution
   // https://css-tricks.com/fitting-text-to-a-container/
   function resizeFunc(){
-    referenceSize = document.getElementById("keyContainer4by5").clientWidth;
+    referenceSize = document.getElementById("keypadcontainer").clientWidth;
     setFontSize(container2, .1);
     setFontSize(document.getElementById("func-popup-container"), .05);
     setFontSize(document.getElementById("units-popup-container"), .05);
     
     setFontSize(document.getElementById("keyContainerSingleby5"), .06);
+    setFontSize(document.getElementById("main-key-container"), .06);
+    setFontSize(document.getElementById("keyContainer4by5"), .075);
     setFontSize(document.getElementById("version-msg"), .06);
     setFontSize(document.getElementById("javascript-version"), .06);
 
