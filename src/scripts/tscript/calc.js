@@ -20,7 +20,7 @@ const keyBucket = kp.Display.getInstance("key-bucket");
 let isFirst = true;
 const calcDisplay = kp.Display.getInstance("calc-display");
 const statusDisplay = kp.Display.getInstance("calc-status");
-const jsReleaseMsg = "JS release 2023-02-26 0.5";
+const jsReleaseMsg = "JS release 2023-02-27 0.6";
 //keyBucket.displayText(jsReleaseMsg);
 document.getElementById("javascript-version").innerText = jsReleaseMsg;
 document.getElementById("dark-light-slider").onchange = function (event) {
@@ -38,8 +38,28 @@ document.getElementById("dark-light-slider").onchange = function (event) {
         container.classList.add("kp-light");
         document.body.style.backgroundColor = "white";
     }
-    console.log(target);
+    //console.log(target);
 };
+document.getElementById("extra-keys-slider").onchange = function (event) {
+    let target = event.target;
+    setNumberOfKeys(target);
+    localStorage.setItem("extra-keys-slider", target.checked.toString());
+    //console.log(target);
+};
+function setNumberOfKeys(target) {
+    const containerRow = document.getElementById("keyContainerSingleby5Two");
+    const containerColumn = document.getElementById("extra-keys-container");
+    if (target.checked) {
+        // min keys
+        containerColumn.style.display = "none";
+        containerRow.style.display = "none";
+    }
+    else {
+        // max keys
+        containerColumn.style.display = "";
+        containerRow.style.display = "";
+    }
+}
 /**
  * TODO: fix @see comment below
  * The function below will become the {@link kp.DefaultListner.key}
@@ -114,6 +134,10 @@ window.addEventListener("load", function () {
     const stor = localStorage.getItem("keyBucket");
     keyBucket.displayText(localStorage.getItem("keyBucket"));
     calculate(null); // make sure zero is displayed
+    const keySlider = this.document.getElementById("extra-keys-slider");
+    keySlider.checked = (localStorage.getItem("extra-keys-slider") === 'true');
+    setNumberOfKeys(keySlider);
+    document.body.style.display = "";
 });
 //
 // var myElement = document.createElement("div");

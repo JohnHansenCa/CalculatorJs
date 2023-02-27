@@ -25,7 +25,7 @@ const keyBucket = kp.Display.getInstance("key-bucket");
 let isFirst = true;
 const calcDisplay = kp.Display.getInstance("calc-display")  ;
 const statusDisplay = kp.Display.getInstance("calc-status");
-const jsReleaseMsg = "JS release 2023-02-26 0.5"
+const jsReleaseMsg = "JS release 2023-02-27 0.6"
 //keyBucket.displayText(jsReleaseMsg);
 document.getElementById("javascript-version").innerText = jsReleaseMsg;
 document.getElementById("dark-light-slider").onchange = function(event: Event){
@@ -43,7 +43,29 @@ document.getElementById("dark-light-slider").onchange = function(event: Event){
         container.classList.add("kp-light");
         document.body.style.backgroundColor = "white";
     }
-    console.log(target);
+    //console.log(target);
+}
+document.getElementById("extra-keys-slider").onchange = function(event: Event){
+    let target:HTMLInputElement = event.target as any;
+    setNumberOfKeys(target);
+    localStorage.setItem("extra-keys-slider", target.checked.toString());
+    //console.log(target);
+}
+function setNumberOfKeys(target:HTMLInputElement){
+    
+    const containerRow = document.getElementById("keyContainerSingleby5Two");
+    const containerColumn = document.getElementById("extra-keys-container");
+    if(target.checked){
+        // min keys
+        containerColumn.style.display = "none";
+        containerRow.style.display = "none";
+    }
+    else{
+        // max keys
+        
+        containerColumn.style.display = "";
+        containerRow.style.display = "";
+    }
 }
 /**
  * TODO: fix @see comment below
@@ -83,6 +105,7 @@ const _keyHandler:kp.KeyListener = function(keyValue:string, e:HTMLElement):void
     }
    
 }
+
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function calculate(e:unknown){
@@ -125,6 +148,11 @@ window.addEventListener("load", function(){
     const stor = localStorage.getItem("keyBucket");
     keyBucket.displayText(localStorage.getItem("keyBucket"));
     calculate(null); // make sure zero is displayed
+
+    const keySlider = this.document.getElementById("extra-keys-slider") as HTMLInputElement;
+    keySlider.checked = (localStorage.getItem("extra-keys-slider") === 'true');
+    setNumberOfKeys(keySlider);
+    document.body.style.display = "";
 });
 //
 // var myElement = document.createElement("div");
