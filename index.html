@@ -60,7 +60,7 @@ https://www.npmjs.com/package/eslint-plugin-html -->
             <button id="about-btn" class="kp-key kp-key-style kp-color" data-kp="popup-key" data-kp-placement="left">about</button>
             <div id="about-message" class="kp-flex-container kp-key-style kp-color kp-yellow" style="flex-direction:column; display:none; line-height:unset "
                 data-popper-placement="left">
-                <span id="version-msg">Version 0.1.10<br><span style="font-style:italic">Experimental</span></span>
+                <span id="version-msg">Version 0.1.11<br><span style="font-style:italic">Experimental</span></span>
                 <span id="javascript-version">test</span>
                 <a href="https://github.com/JohnHansenCa/CalculatorJs/blob/main/README.md" target="_blank">Visit Calculator JS on Github</a>
                 <a href="https://github.com/JohnHansenCa/CalculatorJs/blob/main/LICENSE" target="_blank">Licensed under GNU Affero GPL v3.0</a>
@@ -271,15 +271,23 @@ https://www.npmjs.com/package/eslint-plugin-html -->
         <button class="kp-key kp-key-style kp-color kp-yellow" style=" max-height:2em; width:90%">TBD</button>
       <button id="kp-key-backspace" class="kp-key kp-key-style kp-color kp-blue" data-kp="key" style=" max-height:2em; width:90%">⌫</button>
         </div>
-<!-- 
-        *** Second row of optional keys
-         -->
+    <!-- 
+    *** Second row of optional keys
+    -->
          <div id="keyContainerSingleby5Two" class="kp-grid-container kp-lambda" style=" grid-template-columns:  1fr 1fr 1fr 1fr 1fr; font-size: 30px; width:100%">
-            <button id="kp-key-delete" class="kp-key kp-key-style kp-color" data-kp="key" style="max-height:2em; width:90%">u1</button>
-            <button id="kp-key-delete" class="kp-key kp-key-style kp-color" data-kp="key" style="max-height:2em; width:90%">u2</button>
-            <button id="kp-key-delete" class="kp-key kp-key-style kp-color" data-kp="key" style="max-height:2em; width:90%">u3</button>
-            <button id="kp-key-delete" class="kp-key kp-key-style kp-color" data-kp="key" style="max-height:2em; width:90%">u4</button>
-            <button id="kp-key-delete" class="kp-key kp-key-style kp-color" data-kp="key" style="max-height:2em; width:90%">π</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="popup-key" data-kp-placement="bottom" style="max-height:2em; width:90%">u1</button>
+            <div id="user-defined-message" class ="kp-flex-container kp-key-style kp-orange"  style="display:none; width:60%; aspect-ratio:unset">
+              <p>
+              <span>User defined key.</span><br>
+              <span>Available in a future release </span> </p>
+            </div>
+            <button class="kp-key kp-key-style kp-color" data-kp="popup-key" data-kp-placement="bottom"
+              data-kp-target="user-defined-message" style="max-height:2em; width:90%">u2</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="popup-key" data-kp-placement="bottom"
+            data-kp-target="user-defined-message" style="max-height:2em; width:90%">u3</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="popup-key" data-kp-placement="bottom"
+            data-kp-target="user-defined-message" style="max-height:2em; width:90%">u4</button>
+            <button class="kp-key kp-key-style kp-color" data-kp="key" style="max-height:2em; width:90%">π</button>
          </div>
          <!-- 
         *** Main Calculator Keys
@@ -291,9 +299,9 @@ https://www.npmjs.com/package/eslint-plugin-html -->
             <button  class="kp-key kp-key-style kp-color" data-kp="key"  style="justify-content:center">1/x</button>
             <button  class="kp-key kp-key-style kp-color" data-kp="key" style="justify-content:center">^2</button>
             <button  class="kp-key kp-key-style kp-color" data-kp="key" style="justify-content:center">^</button>
-            <button  class="kp-key kp-key-style kp-color" >user01</button>
-            <button  class="kp-key kp-key-style kp-color" >user02</button>
-            <button  class="kp-key kp-key-style kp-color" >user03</button>
+            <button  class="kp-key kp-key-style kp-color" data-kp="popup-key" data-kp-target="user-defined-message"  >user01</button>
+            <button  class="kp-key kp-key-style kp-color" data-kp="popup-key" data-kp-target="user-defined-message"  >user02</button>
+            <button  class="kp-key kp-key-style kp-color"  data-kp-target="user-defined-message" data-kp="popup-key" >user03</button>
         </div>
    <div id="keyContainer4by5" class="kp-grid-container" style=" grid-template-columns:  1fr 1fr 1fr 1fr ; font-size: 30px; width:100%">
      

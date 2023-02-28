@@ -10,7 +10,7 @@ const dataAttribute = Object.freeze({
     VALUE: "data-kp-value",
     LABEL: "data-kp-label",
     KPDISPLAY: "data-kp-display",
-    KPTARGET: "data-kp-target",
+    TARGET: "data-kp-target",
     PLACEMENT: "data-kp-placement"
 });
 /** Identifies the kind of kp such as {@link Key}, {@link Container} etc*/
@@ -134,7 +134,12 @@ const popupEventHandler = function (event) {
     let element = event.target;
     if (element.nodeName === "SPAN")
         element = element.parentElement; // occurs when span inside key element
-    const puContainer = element.nextElementSibling; // todo: this is too simple, need to check
+    let puContainer;
+    const targetStr = Util.getKpAttribute(element, dataAttribute.TARGET);
+    if (targetStr == "")
+        puContainer = element.nextElementSibling; // todo: this is too simple, need to check
+    else
+        puContainer = document.getElementById(targetStr);
     const isSomeParentPopup = parentPopupKey(element) != null;
     if (popupContainers.includes(puContainer)) {
         if (popupContainers[0] == puContainer) {
@@ -277,7 +282,15 @@ addEventListener('DOMContentLoaded', (event) => {
             if (_placement === "")
                 _placement = 'right';
             const boundary = document.getElementById("calculator-container");
-            Popper.createPopper(element, element.nextElementSibling, {
+            const targetStr = Util.getKpAttribute(element, dataAttribute.TARGET);
+            let target;
+            if (targetStr == "") {
+                target = element.nextElementSibling;
+            }
+            else {
+                target = document.getElementById(targetStr);
+            }
+            Popper.createPopper(element, target, {
                 placement: _placement,
                 modifiers: [{
                         name: 'preventOverflow',
