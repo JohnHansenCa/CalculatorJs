@@ -43,7 +43,6 @@ input:checked + .slider2{
     }
 input:checked + .slider {
 background-color: #2c2c2d;
-
 }
 
 input:focus + .slider2,

@@ -1,3 +1,7 @@
+// (c) copyright 2023 - https://github.com/JohnHansenCa
+// All rights reservered except as delinated below
+// GNU Affero General Public License v3.0
+
 //import * as kp from "/root//src/scripts/kp.js" 
 //import * as kp from "../../KeyPadJs/src/scripts/kp.js"
 import * as kp from "../KeyPadJs/tscript/kp.js"
@@ -25,7 +29,7 @@ const keyBucket = kp.Display.getInstance("key-bucket");
 let isFirst = true;
 const calcDisplay = kp.Display.getInstance("calc-display")  ;
 const statusDisplay = kp.Display.getInstance("calc-status");
-const jsReleaseMsg = "JS release 2023-02-27 0.6"
+const jsReleaseMsg = "JS release 2023-02-28 0.7"
 //keyBucket.displayText(jsReleaseMsg);
 document.getElementById("javascript-version").innerText = jsReleaseMsg;
 document.getElementById("dark-light-slider").onchange = function(event: Event){
@@ -109,7 +113,9 @@ const _keyHandler:kp.KeyListener = function(keyValue:string, e:HTMLElement):void
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function calculate(e:unknown){
-    const _evaluateText = keyBucket.text.replaceAll("×","*").replaceAll("÷","/");
+    const _evaluateText = keyBucket.text.replaceAll("×","*").replaceAll("÷","/").replaceAll("π", "pi");
+    // const test = ("π").replaceAll("π", "pi"); 
+    // console.log(test);
     //let result = math.evaluate(_evaluateText);
     //calcDisplay.displayText( result);
     localStorage.setItem("keyBucket", keyBucket.element.innerText);
