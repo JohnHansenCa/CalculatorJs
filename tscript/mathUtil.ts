@@ -1,3 +1,6 @@
+// (c) copyright 2023 - https://github.com/JohnHansenCa
+// All rights reservered except as delinated below
+// GNU Affero General Public License v3.0
 import * as Mathjs from "./mathjs/mathjs"
 interface baseUnit{
     dimensions: [];

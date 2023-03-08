@@ -2,26 +2,95 @@
 // All rights reservered except as delinated below
 // GNU Affero General Public License v3.0
 
-//import * as kp from "/root//src/scripts/kp.js" 
-//import * as kp from "../../KeyPadJs/src/scripts/kp.js"
 import * as kp from "../KeyPadJs/tscript/kp.js"
-//import * as kp from "kpad/kp.js"
-//import * as kp from "../KeyPadJs/src/scripts/kp.js"
 import * as Mathjs from "./mathjs/mathjs"
 import { getMathBaseUnits, getMathUnits, baseUnit, special } from "./mathUtil.js";
-// interface baseUnit{
-//     dimensions: [];
-//     key: string;
-// }
-// interface special {
-//     /** Gives access to built-in unit definitions. */
-//     Unit: {
-//         /** returns an object giving all the base units as properities in upper case strings, eg LENGTH, MASS, etc */
-//         BASE_UNITS: Record<string, baseUnit> ;
-//         /**  returns an object giving all the units as properities in mostly lower case strings, eg A, ampere, amperes, m, m2, meter, etc */
-//         UNITS: Record<string, Mathjs.UnitComponent>;
-//     }
-// }
+
+class CalcItem{
+    private _eqnString:string;
+    private _time:number;
+    private _calcString:string;
+    private constructor(eqn:string, calc:string){
+       this.update(eqn, calc);
+    }
+    public static create(eqn:string, calc:string):CalcItem{
+        return new CalcItem(eqn, calc);
+    }
+    /**
+     * Copy is used to create a true CalcItem after JSON.parse is used.
+     * @param item 
+     * @returns 
+     */
+    public static copy(item:CalcItem):CalcItem{
+        const returnItem = new CalcItem(item._eqnString, item._calcString);
+        returnItem._time = item._time;
+        return returnItem;
+    }
+    public get eqn():string{
+        return this._eqnString;
+    }
+    public update(eqn: string, calc:string){
+        this._eqnString = eqn;
+        this._calcString = calc;
+        this._time = Date.now();
+    }
+    public get time(){
+        return this._time;
+    }
+    public get calc(){
+        return this._calcString;
+    }
+    public get ISOTime():string{
+        return new Date(this._time).toISOString();
+    }
+    public get dateTime():string{
+        return new Date(this._time).toString();
+    }
+}
+class History{
+    
+    private static _currentCalcItem:CalcItem = null;
+    private static historyList:CalcItem[] = [];
+    private static lastCalc: CalcItem;
+    static{
+        const historyItem = localStorage.getItem("history");
+        let list:CalcItem[];
+        if(historyItem != null){
+            list = JSON.parse(historyItem);
+            list.forEach(item =>{
+                History.historyList.push(CalcItem.copy(item))
+            });
+        }
+        if(History.historyList.length > 0)  
+        {
+            const last =History.historyList.length - 1;
+            History._currentCalcItem = History.historyList[last]
+            History.lastCalc = History.historyList[last];
+        }
+    }
+    static add(calcItem:CalcItem):void {
+        if(calcItem != History.lastCalc)
+            History.historyList.push(calcItem);
+        History.lastCalc = calcItem;
+        localStorage.setItem("history", JSON.stringify(History.historyList));
+    }
+    static get List(): CalcItem[]{
+        return History.historyList;
+    }
+    static store(){
+        if(History._currentCalcItem == null) {
+            History._currentCalcItem = CalcItem.create(keyBucket.text, calcDisplay.text);
+        }
+        else History._currentCalcItem.update(keyBucket.text, calcDisplay.text);
+        History.add(History._currentCalcItem);
+    }
+    static newCurrentItem(){
+        History._currentCalcItem = null;
+    }
+}
+
+
+
 let addSpace="";
 //https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types
 declare const math:Mathjs.MathJsStatic & special; 
@@ -89,8 +158,10 @@ const _keyHandler:kp.KeyListener = function(keyValue:string, e:HTMLElement):void
         let char = keyValue;
         if(char === "\b" || char == "⌫")
         keyBucket.displayText(keyBucket.text.slice(0, -1));
-        else if (char === "␡")
-        keyBucket.clear();
+        else if (char === "␡"){
+            keyBucket.clear();
+            History.newCurrentItem();
+        }
         else if (char === "to"){
           char = " "+ char + " ";
           keyBucket.displayText(keyBucket.text + char);
@@ -118,7 +189,6 @@ function calculate(e:unknown){
     // console.log(test);
     //let result = math.evaluate(_evaluateText);
     //calcDisplay.displayText( result);
-    localStorage.setItem("keyBucket", keyBucket.element.innerText);
     if(_evaluateText == ""){
         calcDisplay.displayText("0");
         statusDisplay.displayText("status:okay");
@@ -130,6 +200,8 @@ function calculate(e:unknown){
             calcDisplay.displayText(result);
             
             statusDisplay.displayText("status:okay");
+            localStorage.setItem("keyBucket", keyBucket.element.innerText); 
+            History.store();
         }
         catch(err){
             if(!calcDisplay.isEmpty)
@@ -144,6 +216,9 @@ kp.DefaultListner.key = _keyHandler;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const observer = new MutationObserver((mutationlist, observ)=>{ calculate(observ)});
 observer.observe (keyBucket.element, { attributes: true, childList: true, subtree:true, characterData:true} );
+/**
+ * *** Startup Code ***
+ */
 // display about message on start up
 window.addEventListener("load", function(){
     const settingBtn = document.getElementById('settings-btn');
@@ -158,6 +233,27 @@ window.addEventListener("load", function(){
     const keySlider = this.document.getElementById("extra-keys-slider") as HTMLInputElement;
     keySlider.checked = (localStorage.getItem("extra-keys-slider") === 'true');
     setNumberOfKeys(keySlider);
+
+    // *** initialize history div
+    const historyBtn = this.document.getElementById("history-btn");
+    historyBtn.addEventListener("click", function(){
+        const historyDiv = document.getElementById("history-message");
+        historyDiv.innerHTML = "";
+        History.List.forEach(item =>{
+            let span = document.createElement("span");
+            let button = document.createElement("button");
+            span.append(`${item.ISOTime}:`);
+            button.innerHTML = `${item.eqn}`;
+            button.addEventListener("click", function(event:Event){
+                History.newCurrentItem();
+                const element = event.target as HTMLElement;
+                keyBucket.displayText(element.innerText);
+            })
+            span.appendChild(button);
+            span.append(`=${item.calc}`)
+            historyDiv.appendChild(span);
+        })
+    });
     document.body.style.display = "";
 });
 //

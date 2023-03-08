@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<!--  (c) copyright 2023 - https://github.com/JohnHansenCa
+      All rights reservered except as delinated below
+      GNU Affero General Public License v3.0 
+  -->
 <!-- TODO: Add eslint for html files, remove ignore statment in eslintrc.js
 https://www.npmjs.com/package/eslint-plugin-html -->
 <html>
@@ -41,12 +45,13 @@ https://www.npmjs.com/package/eslint-plugin-html -->
             <input id="extra-keys-slider" type = 'checkbox'>
             <span class = 'slider2 round'></span>
         </label>
-        <button class ="kp-key kp-key-style kp-color kp-black" data-kp="popup-key" data-kp-placement="bottom">
+        <button id="history-btn" class ="kp-key kp-key-style kp-color kp-black" data-kp="popup-key" data-kp-placement="bottom">
             <span class="material-symbols-outlined">
                 history
                 </span>
             </button>
-        <div id="history-message" class="kp-flex-container kp-key-style kp-color kp-orange" style="display:none; width:fit-content; line-height:unset">
+        <div id="history-message" class="kp-flex-container kp-key-style kp-color kp-orange" 
+          style="display:none; width:fit-content; line-height:unset; flex-direction:column">
             <span style="margin:5px">History button will display past calculations.<br>
             Feature to be available in future update.</span>
             </div>
@@ -110,12 +115,12 @@ https://www.npmjs.com/package/eslint-plugin-html -->
          
           </div>
          <div id="math-btn-container1" class="kp-grid-container"  style="grid-template-columns: 1fr 1fr 1fr">
-            <button  class="kp-key kp-key-style kp-color" data-kp="key">pi</button>
+            <button  class="kp-key kp-key-style kp-color" data-kp="key">π</button>
             <button  class="kp-key kp-key-style kp-color" data-kp="key">e</button>
-            <button  class="kp-key kp-key-style kp-color" data-kp="key">1/x</button>
-            <button  class="kp-key kp-key-style kp-color" data-kp="key">^</button>
-            <button  class="kp-key kp-key-style kp-color" data-kp="key">x2</button>
-            <button  class="kp-key kp-key-style kp-color" data-kp="key">sqrt()</button>
+            <button  class="kp-key kp-key-style kp-color" data-kp="key">⅟𝑥</button>
+            <button  class="kp-key kp-key-style kp-color" data-kp="key">𝑥ⁿ</button>
+            <button  class="kp-key kp-key-style kp-color" data-kp="key">𝑥²</button>
+            <button  class="kp-key kp-key-style kp-color" data-kp="key">√𝑥</button>
             <button  class="kp-key kp-key-style kp-color" data-kp="key">log</button>
             <button  class="kp-key kp-key-style kp-color" data-kp="key">ln</button>
             <button  class="kp-key kp-key-style kp-color" data-kp="key">!</button>
@@ -297,9 +302,9 @@ https://www.npmjs.com/package/eslint-plugin-html -->
         <!-- <div id="extra-keys-container" class="kp-grid-container" style=" grid-template-columns:  1fr  ; font-size: 30px; width:20% "> -->
             <div id="extra-keys-container" class="kp-list-container kp-lambda" > 
             <button  class="kp-key kp-key-style kp-color" data-kp="key" style="justify-content:center">%</button>
-            <button  class="kp-key kp-key-style kp-color" data-kp="key"  style="justify-content:center">1/x</button>
-            <button  class="kp-key kp-key-style kp-color" data-kp="key" style="justify-content:center">^2</button>
-            <button  class="kp-key kp-key-style kp-color" data-kp="key" style="justify-content:center">^</button>
+            <button  class="kp-key kp-key-style kp-color" data-kp="key"  style="justify-content:center">⅟𝑥</button>
+            <button  class="kp-key kp-key-style kp-color" data-kp="key" style="justify-content:center">𝑥²</button>
+            <button  class="kp-key kp-key-style kp-color" data-kp="key" style="justify-content:center">𝑥ⁿ</button>
             <button  class="kp-key kp-key-style kp-color" data-kp="popup-key" data-kp-target="user-defined-message"  >user01</button>
             <button  class="kp-key kp-key-style kp-color" data-kp="popup-key" data-kp-target="user-defined-message"  >user02</button>
             <button  class="kp-key kp-key-style kp-color"  data-kp-target="user-defined-message" data-kp="popup-key" >user03</button>
