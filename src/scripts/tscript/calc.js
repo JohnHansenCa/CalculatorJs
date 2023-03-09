@@ -64,7 +64,8 @@ class History {
     }
     static clear() {
         History.historyList = [];
-        History.historyList.push(History._currentCalcItem);
+        if (kp.Util.isValidObject(History._currentCalcItem))
+            History.historyList.push(History._currentCalcItem);
         localStorage.setItem("history", JSON.stringify(History.historyList));
         History._currentCalcItem = null;
     }
@@ -150,8 +151,10 @@ const _keyHandler = function (keyValue, e) {
         if (char === "\b" || char == "⌫")
             keyBucket.displayText(keyBucket.text.slice(0, -1));
         else if (char === "␡") {
-            keyBucket.clear();
-            History.newCurrentItem();
+            if (keyBucket.text != "") {
+                keyBucket.clear();
+                History.newCurrentItem();
+            }
         }
         else if (char === "⅟𝑥" && keyBucket.text != "") {
             keyBucket.displayText(`1/(${keyBucket.text})`);
