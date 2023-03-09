@@ -63,7 +63,7 @@ class History{
         }
         if(History.historyList.length > 0)  
         {
-            const last =History.historyList.length - 1;
+            const last = History.historyList.length - 1;
             History._currentCalcItem = History.historyList[last]
             History.lastCalc = History.historyList[last];
         }
@@ -87,6 +87,12 @@ class History{
     static newCurrentItem(){
         History._currentCalcItem = null;
     }
+    static clear(){
+        History.historyList = [];
+        History.historyList.push(History._currentCalcItem);
+        localStorage.setItem("history", JSON.stringify(History.historyList));
+        History._currentCalcItem = null;
+    }
 }
 
 
@@ -98,7 +104,7 @@ const keyBucket = kp.Display.getInstance("key-bucket");
 let isFirst = true;
 const calcDisplay = kp.Display.getInstance("calc-display")  ;
 const statusDisplay = kp.Display.getInstance("calc-status");
-const jsReleaseMsg = "JS release 2023-03-09 0.10"
+const jsReleaseMsg = "JS release 2023-03-09 0.11"
 //keyBucket.displayText(jsReleaseMsg);
 document.getElementById("javascript-version").innerText = jsReleaseMsg;
 document.getElementById("dark-light-slider").onchange = function(event: Event){
@@ -247,9 +253,13 @@ window.addEventListener("load", function(){
     setNumberOfKeys(keySlider);
 
     // *** initialize history div
+    const clearHistoryBtn = this.document.getElementById("clear-history-btn");
+    clearHistoryBtn.addEventListener("click", function(){
+        History.clear();
+    })
     const historyBtn = this.document.getElementById("history-btn");
     historyBtn.addEventListener("click", function(){
-        const historyDiv = document.getElementById("history-message");
+        const historyDiv = document.getElementById("history-content");
         historyDiv.innerHTML = "";
         History.List.forEach(item =>{
             let span = document.createElement("span");
