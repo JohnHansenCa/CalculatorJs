@@ -98,7 +98,7 @@ const keyBucket = kp.Display.getInstance("key-bucket");
 let isFirst = true;
 const calcDisplay = kp.Display.getInstance("calc-display")  ;
 const statusDisplay = kp.Display.getInstance("calc-status");
-const jsReleaseMsg = "JS release 2023-03-01 0.9"
+const jsReleaseMsg = "JS release 2023-03-09 0.10"
 //keyBucket.displayText(jsReleaseMsg);
 document.getElementById("javascript-version").innerText = jsReleaseMsg;
 document.getElementById("dark-light-slider").onchange = function(event: Event){
@@ -161,6 +161,18 @@ const _keyHandler:kp.KeyListener = function(keyValue:string, e:HTMLElement):void
         else if (char === "␡"){
             keyBucket.clear();
             History.newCurrentItem();
+        }
+        else if(char === "⅟𝑥" && keyBucket.text != ""){
+            keyBucket.displayText(`1/(${keyBucket.text})`)
+        }
+        else if(char === "𝑥²"){
+            keyBucket.addText('^2')
+        }
+        else if(char === "𝑥ⁿ"){
+            keyBucket.addText('^')
+        }
+        else if(char === "√𝑥"){
+            keyBucket.displayText(`sqrt(${keyBucket.text})`)
         }
         else if (char === "to"){
           char = " "+ char + " ";
