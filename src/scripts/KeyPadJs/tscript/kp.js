@@ -328,7 +328,7 @@ addEventListener('DOMContentLoaded', (event) => {
     //resultDiv.addEventListener('DOMSubtreeModified', calculate);
     //body.style.visibility = "visible";
 });
-console.log("hi");
+//console.log("hi");
 export { Kind, dataAttribute, createUniqueId, DefaultListner };
 export { Display } from "./display.js";
 export { Container } from "./container.js";
