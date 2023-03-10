@@ -37,6 +37,22 @@ class CalcItem {
     get ISOTime() {
         return new Date(this._time).toISOString();
     }
+    get customTime() {
+        const d = new Date(this._time);
+        const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+        const mo = new Intl.DateTimeFormat('en', { month: 'numeric' }).format(d);
+        const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+        const hr = new Intl.DateTimeFormat('fr', { hour: 'numeric' }).format(d).substring(0, 2); // first 2 digits only
+        let mn = new Intl.DateTimeFormat('en', { minute: 'numeric' }).format(d);
+        if (mn.length == 1)
+            mn = "0" + mn;
+        let ss = new Intl.DateTimeFormat('en', { second: 'numeric' }).format(d);
+        if (ss.length == 1)
+            ss = "0" + ss;
+        const zz = new Intl.DateTimeFormat("sv", { timeZoneName: "short" }).format(d).split(' ')[1];
+        //const zz = new Intl.DateTimeFormat("en",{timeZone:""}).format(d);
+        return `${ye}-${mo}-${da} ${hr}:${mn}:${ss}(${zz})`;
+    }
     get dateTime() {
         return new Date(this._time).toString();
     }
@@ -92,7 +108,7 @@ const keyBucket = kp.Display.getInstance("key-bucket");
 let isFirst = true;
 const calcDisplay = kp.Display.getInstance("calc-display");
 const statusDisplay = kp.Display.getInstance("calc-status");
-const jsReleaseMsg = "JS release 2023-03-09 0.11";
+const jsReleaseMsg = "JS release 2023-03-10 0.12";
 //keyBucket.displayText(jsReleaseMsg);
 document.getElementById("javascript-version").innerText = jsReleaseMsg;
 document.getElementById("dark-light-slider").onchange = function (event) {
@@ -243,7 +259,8 @@ window.addEventListener("load", function () {
         History.List.forEach(item => {
             let span = document.createElement("span");
             let button = document.createElement("button");
-            span.append(`${item.ISOTime}:`);
+            span.append(`${item.customTime}:`);
+            span.appendChild(document.createElement("br"));
             button.innerHTML = `${item.eqn}`;
             button.addEventListener("click", function (event) {
                 History.newCurrentItem();
@@ -253,6 +270,8 @@ window.addEventListener("load", function () {
             span.appendChild(button);
             span.append(`=${item.calc}`);
             historyDiv.appendChild(span);
+            const br = document.createElement("br");
+            historyDiv.appendChild(br);
         });
     });
     document.body.style.display = "";
