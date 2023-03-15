@@ -78,6 +78,9 @@ class History {
     static newCurrentItem() {
         History._currentCalcItem = null;
     }
+    static get currentItem() {
+        return History._currentCalcItem;
+    }
     static clear() {
         History.historyList = [];
         if (kp.Util.isValidObject(History._currentCalcItem))
@@ -108,7 +111,7 @@ const keyBucket = kp.Display.getInstance("key-bucket");
 let isFirst = true;
 const calcDisplay = kp.Display.getInstance("calc-display");
 const statusDisplay = kp.Display.getInstance("calc-status");
-const jsReleaseMsg = "JS release 2023-03-10 0.12";
+const jsReleaseMsg = "JS release 2023-03-15 0.13";
 //keyBucket.displayText(jsReleaseMsg);
 document.getElementById("javascript-version").innerText = jsReleaseMsg;
 document.getElementById("dark-light-slider").onchange = function (event) {
@@ -166,7 +169,7 @@ const _keyHandler = function (keyValue, e) {
         let char = keyValue;
         if (char === "\b" || char == "⌫")
             keyBucket.displayText(keyBucket.text.slice(0, -1));
-        else if (char === "␡") {
+        else if (char === "⏎" || char === "\r") {
             if (keyBucket.text != "") {
                 keyBucket.clear();
                 History.newCurrentItem();
@@ -198,11 +201,18 @@ const _keyHandler = function (keyValue, e) {
             keyBucket.displayText(keyBucket.text + addSpace + char);
             addSpace = "";
         }
+        processKey(char);
     }
 };
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function calculate(e) {
-    const _evaluateText = keyBucket.text.replaceAll("×", "*").replaceAll("÷", "/").replaceAll("π", "pi");
+    let _evaluateText = keyBucket.text.replaceAll("×", "*").replaceAll("÷", "/").replaceAll("π", "pi");
+    if (_evaluateText.search("\n") > -1) {
+        //keyBucket.text = keyBucket.text.replaceAll("\n","");
+        keyBucket.clear();
+        History.newCurrentItem();
+        return;
+    }
     // const test = ("π").replaceAll("π", "pi"); 
     // console.log(test);
     //let result = math.evaluate(_evaluateText);
@@ -228,6 +238,11 @@ function calculate(e) {
         }
     }
 }
+function processKey(key) {
+    if (key === ")" && (statusDisplay.text.startsWith("Unexpected") || statusDisplay.text.startsWith("status:okay"))) {
+        keyBucket.text = "(" + keyBucket.text;
+    }
+}
 kp.DefaultListner.key = _keyHandler;
 //key_bucket.element.addEventListener('DOMSubtreeModified', calculate);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -236,11 +251,16 @@ observer.observe(keyBucket.element, { attributes: true, childList: true, subtree
 /**
  * *** Startup Code ***
  */
-// display about message on start up
 window.addEventListener("load", function () {
+    // display about message on start up
     const settingBtn = document.getElementById('settings-btn');
     document.getElementById('settings-btn').click();
     document.getElementById('about-btn').click();
+    // get keyboard input
+    keyBucket.element.onkeyup = function (event) {
+        const key = event.key;
+        processKey(key);
+    };
     const stor = localStorage.getItem("keyBucket");
     keyBucket.displayText(localStorage.getItem("keyBucket"));
     calculate(null); // make sure zero is displayed

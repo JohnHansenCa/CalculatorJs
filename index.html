@@ -72,7 +72,7 @@ https://www.npmjs.com/package/eslint-plugin-html -->
             <button id="about-btn" class="kp-key kp-key-style kp-color" data-kp="popup-key" data-kp-placement="left">about</button>
             <div id="about-message" class="kp-flex-container kp-key-style kp-color kp-yellow" style="flex-direction:column; display:none; line-height:unset "
                 data-popper-placement="left">
-                <span id="version-msg">Version 0.1.15<br><span style="font-style:italic">Experimental</span></span>
+                <span id="version-msg">Version 0.1.16<br><span style="font-style:italic">Experimental</span></span>
                 <span id="javascript-version">test</span>
                 <a href="https://github.com/JohnHansenCa/CalculatorJs/blob/main/README.md" target="_blank">Visit Calculator JS on Github</a>
                 <a href="https://github.com/JohnHansenCa/CalculatorJs/blob/main/LICENSE" target="_blank">Licensed under GNU Affero GPL v3.0</a>
@@ -95,8 +95,18 @@ https://www.npmjs.com/package/eslint-plugin-html -->
 <!-- 
     *** first row of keys
      -->
-    <div id="keyContainerSingleby5" class="kp-grid-container kp-lambda" style=" grid-template-columns:  1fr 1fr 1fr 1fr 1fr; font-size: 30px; width:100%">
-        <button id="kp-key-delete" class="kp-key kp-key-style kp-color kp-red" data-kp="key" style="max-height:2em; width:90%">␡</button>
+    <div id="keyContainerSingleby5" class="kp-grid-container kp-lambda-thin" style=" grid-template-columns:  1fr 1fr 1fr 1fr 1fr; font-size: 30px; width:100%">
+        <button  class="kp-key kp-key-style kp-color kp-yellow" style="max-height:2em; width:90%">tbd</button>
+        <button id="cr-btn" class="kp-key kp-key-style kp-color kp-green" data-kp="key" style=" max-height:2em; width:90%">⏎</button>
+        <button id="left-tab-btn" class="kp-key kp-key-style kp-color kp-blue" style=" max-height:2em; width:90%">⇤</button>
+        <button id="right-tab-btn" class="kp-key kp-key-style kp-color kp-blue" style=" max-height:2em; width:90%">⇥</button>
+      <button id="kp-key-backspace" class="kp-key kp-key-style kp-color kp-blue" data-kp="key" style=" max-height:2em; width:90%">⌫</button>
+      </div>
+      <div id="keyContainerSingleby5" class="kp-grid-container kp-lambda" style=" grid-template-columns:  1fr 1fr 1fr 1fr 1fr; font-size: 30px; width:100%">
+      <button id="func-key" class="kp-key kp-key-style kp-color kp-orange" data-kp="popup-key" data-kp-placement="bottom" style="max-height:2em; width:90%">𝐶</button>
+        <div id="func-popup-container" class="kp-flex-container"  style="display:none" >
+          <div class="kp-list-container">to be added</div>
+        </div>
      <button id="func-key" class="kp-key kp-key-style kp-color kp-orange" data-kp="popup-key" data-kp-placement="bottom" style="max-height:2em; width:90%">𝑓x</button>
      <div id="func-popup-container" class="kp-flex-container"  style="display:none" >
        <div class="kp-list-container">
@@ -287,7 +297,7 @@ https://www.npmjs.com/package/eslint-plugin-html -->
           <button id="tempbtn" class="kp-key kp-key-style kp-color kp-list-key" data-kp="key"> to </button>
     </div>
         <button class="kp-key kp-key-style kp-color kp-yellow" style=" max-height:2em; width:90%">TBD</button>
-      <button id="kp-key-backspace" class="kp-key kp-key-style kp-color kp-blue" data-kp="key" style=" max-height:2em; width:90%">⌫</button>
+        <button class="kp-key kp-key-style kp-color kp-yellow" style=" max-height:2em; width:90%">TBD</button>
         </div>
     <!-- 
     *** Second row of optional keys
@@ -388,6 +398,19 @@ https://www.npmjs.com/package/eslint-plugin-html -->
 
     setWidth(document.getElementById("about-message"), .75);
     setFontSize(document.getElementById("about-message-close"), .06);
+    const kbDiv = document.getElementById("keyContainer4by5");
+    let xw = kbDiv.clientWidth;
+    let yw = kbDiv.clientHeight;
+    let x= window.innerHeight;
+    var rect = kbDiv.getBoundingClientRect();
+    const maxh = .9* (x-rect.top);
+    let maxw = maxh;
+    if (maxw < 220)maxw = 220;
+    if(rect.bottom > x){
+      //kbDiv.style.maxHeight = `${maxh}px`;
+      kbDiv.style.maxWidth = `${maxw}px`;
+    }
+    let z = 0;
   }
   window.addEventListener("resize", resizeFunc);
   resizeFunc();

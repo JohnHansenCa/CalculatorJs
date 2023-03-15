@@ -2,8 +2,10 @@
 // All rights reservered except as delinated below
 // GNU Affero General Public License v3.0
 
+import { stat } from "fs";
 import * as kp from "../KeyPadJs/tscript/kp.js"
 import * as Mathjs from "./mathjs/mathjs"
+import { string } from "./mathjs/mathjs";
 import { getMathBaseUnits, getMathUnits, baseUnit, special } from "./mathUtil.js";
 
 class CalcItem{
@@ -101,6 +103,9 @@ class History{
     static newCurrentItem(){
         History._currentCalcItem = null;
     }
+    static get currentItem(){
+        return History._currentCalcItem;
+    }
     static clear(){
         History.historyList = [];
         if(kp.Util.isValidObject(History._currentCalcItem))
@@ -119,7 +124,7 @@ const keyBucket = kp.Display.getInstance("key-bucket");
 let isFirst = true;
 const calcDisplay = kp.Display.getInstance("calc-display")  ;
 const statusDisplay = kp.Display.getInstance("calc-status");
-const jsReleaseMsg = "JS release 2023-03-10 0.12"
+const jsReleaseMsg = "JS release 2023-03-15 0.13"
 //keyBucket.displayText(jsReleaseMsg);
 document.getElementById("javascript-version").innerText = jsReleaseMsg;
 document.getElementById("dark-light-slider").onchange = function(event: Event){
@@ -179,7 +184,8 @@ const _keyHandler:kp.KeyListener = function(keyValue:string, e:HTMLElement):void
         let char = keyValue;
         if(char === "\b" || char == "⌫")
         keyBucket.displayText(keyBucket.text.slice(0, -1));
-        else if (char === "␡"){
+        else 
+        if (char === "⏎" || char === "\r"){
             if(keyBucket.text != ""){
                 keyBucket.clear();
                 History.newCurrentItem();
@@ -212,6 +218,7 @@ const _keyHandler:kp.KeyListener = function(keyValue:string, e:HTMLElement):void
             keyBucket.displayText(keyBucket.text + addSpace + char);
             addSpace = "";
         }
+        processKey(char);
     }
    
 }
@@ -219,7 +226,13 @@ const _keyHandler:kp.KeyListener = function(keyValue:string, e:HTMLElement):void
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function calculate(e:unknown){
-    const _evaluateText = keyBucket.text.replaceAll("×","*").replaceAll("÷","/").replaceAll("π", "pi");
+    let _evaluateText = keyBucket.text.replaceAll("×","*").replaceAll("÷","/").replaceAll("π", "pi");
+    if(_evaluateText.search("\n")> -1){
+            //keyBucket.text = keyBucket.text.replaceAll("\n","");
+            keyBucket.clear();
+            History.newCurrentItem();
+            return;
+    }
     // const test = ("π").replaceAll("π", "pi"); 
     // console.log(test);
     //let result = math.evaluate(_evaluateText);
@@ -246,6 +259,11 @@ function calculate(e:unknown){
         }
     }
  }
+ function processKey(key: string){
+    if(key === ")" && (statusDisplay.text.startsWith("Unexpected") || statusDisplay.text.startsWith("status:okay") )){
+        keyBucket.text = "("+ keyBucket.text;
+    }
+ }
 kp.DefaultListner.key = _keyHandler;
 //key_bucket.element.addEventListener('DOMSubtreeModified', calculate);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -254,12 +272,16 @@ observer.observe (keyBucket.element, { attributes: true, childList: true, subtre
 /**
  * *** Startup Code ***
  */
-// display about message on start up
 window.addEventListener("load", function(){
+    // display about message on start up
     const settingBtn = document.getElementById('settings-btn');
     document.getElementById('settings-btn').click();
     document.getElementById('about-btn').click();
-
+    // get keyboard input
+    keyBucket.element.onkeyup = function(event: KeyboardEvent){
+        const key = event.key;
+        processKey(key);
+    }
     
     const stor = localStorage.getItem("keyBucket");
     keyBucket.displayText(localStorage.getItem("keyBucket"));
