@@ -93,6 +93,13 @@ class History{
     static get List(): CalcItem[]{
         return History.historyList;
     }
+    static remove(item:CalcItem){
+        const index = History.historyList.indexOf(item);
+        if (index > -1) { // only splice array when item is found
+            History.historyList.splice(index, 1); // 2nd parameter means remove one item only
+        }
+        localStorage.setItem("history", JSON.stringify(History.historyList));
+    }
     static store(){
         if(History._currentCalcItem == null) {
             History._currentCalcItem = CalcItem.create(keyBucket.text, calcDisplay.text);
@@ -124,7 +131,7 @@ const keyBucket = kp.Display.getInstance("key-bucket");
 let isFirst = true;
 const calcDisplay = kp.Display.getInstance("calc-display")  ;
 const statusDisplay = kp.Display.getInstance("calc-status");
-const jsReleaseMsg = "JS release 2023-03-15 0.13"
+const jsReleaseMsg = "JS release 2023-03-15 0.14"
 //keyBucket.displayText(jsReleaseMsg);
 document.getElementById("javascript-version").innerText = jsReleaseMsg;
 document.getElementById("dark-light-slider").onchange = function(event: Event){
@@ -185,7 +192,7 @@ const _keyHandler:kp.KeyListener = function(keyValue:string, e:HTMLElement):void
         if(char === "\b" || char == "⌫")
         keyBucket.displayText(keyBucket.text.slice(0, -1));
         else 
-        if (char === "⏎" || char === "\r"){
+        if (char === "⏎" || char === "␡"){
             if(keyBucket.text != ""){
                 keyBucket.clear();
                 History.newCurrentItem();
@@ -264,6 +271,9 @@ function calculate(e:unknown){
         keyBucket.text = "("+ keyBucket.text;
     }
  }
+ const scrollToBottom = (scrollingElement:HTMLElement) => {
+    scrollingElement.scrollTop = scrollingElement.scrollHeight;
+ }
 kp.DefaultListner.key = _keyHandler;
 //key_bucket.element.addEventListener('DOMSubtreeModified', calculate);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -303,8 +313,8 @@ window.addEventListener("load", function(){
         History.List.forEach(item =>{
             let span = document.createElement("span");
             let button = document.createElement("button");
-            span.append(`${item.customTime}:`);
-            span.appendChild(document.createElement("br"));
+            //span.append(`${item.customTime}:`);
+            //span.appendChild(document.createElement("br"));
             button.innerHTML = `${item.eqn}`;
             button.addEventListener("click", function(event:Event){
                 History.newCurrentItem();
@@ -313,10 +323,21 @@ window.addEventListener("load", function(){
             })
             span.appendChild(button);
             span.append(`=${item.calc}`)
+            const delBtn = document.createElement("button");
+            delBtn.innerText = "🗑";
+            //(delBtn as any).item = item;
+            delBtn.addEventListener("click",function(event:Event){
+                History.remove(item);
+                span.style.display = "none";
+                event.stopPropagation();
+                //document.getElementById("history-btn").click(); // refresh display
+            });
+            span.appendChild(delBtn)
             historyDiv.appendChild(span);
             const br = document.createElement("br");
             historyDiv.appendChild(br);
         })
+        scrollToBottom(historyDiv);
     });
     document.body.style.display = "";
 });
