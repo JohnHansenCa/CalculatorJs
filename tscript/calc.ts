@@ -131,7 +131,7 @@ const keyBucket = kp.Display.getInstance("key-bucket");
 let isFirst = true;
 const calcDisplay = kp.Display.getInstance("calc-display")  ;
 const statusDisplay = kp.Display.getInstance("calc-status");
-const jsReleaseMsg = "JS release 2023-03-15 0.14"
+const jsReleaseMsg = "JS release 2023-03-16 0.15"
 //keyBucket.displayText(jsReleaseMsg);
 document.getElementById("javascript-version").innerText = jsReleaseMsg;
 document.getElementById("dark-light-slider").onchange = function(event: Event){
@@ -234,6 +234,11 @@ const _keyHandler:kp.KeyListener = function(keyValue:string, e:HTMLElement):void
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function calculate(e:unknown){
     let _evaluateText = keyBucket.text.replaceAll("×","*").replaceAll("÷","/").replaceAll("π", "pi");
+    _evaluateText = _evaluateText.replaceAll("𝑐", "speedOfLight")
+                .replaceAll("𝐺","gravitationConstant")
+                .replaceAll("ℎ","planckConstant")
+                .replaceAll("ℏ","reducedPlanckConstant")
+                .replaceAll("gₙ","gravity");
     if(_evaluateText.search("\n")> -1){
             //keyBucket.text = keyBucket.text.replaceAll("\n","");
             keyBucket.clear();
@@ -274,6 +279,20 @@ function calculate(e:unknown){
  const scrollToBottom = (scrollingElement:HTMLElement) => {
     scrollingElement.scrollTop = scrollingElement.scrollHeight;
  }
+ function autoCorrect(text:string, correction:string) {
+    const reg = new RegExp(Object.keys(correction).join("|"), "g");
+    return text.replace(reg, (matched) => correction[matched]);
+  }
+  // Consume the function as follows
+ 
+  const correction = {
+    c: "𝑐",
+    worLd: "G",
+    glads: "glad",
+    alife: "alive",
+    Im: "I'm"
+  };
+  //const correctedText = autoCorrect(str, correction);
 kp.DefaultListner.key = _keyHandler;
 //key_bucket.element.addEventListener('DOMSubtreeModified', calculate);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
