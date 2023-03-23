@@ -113,12 +113,28 @@ History.historyList = [];
         History.lastCalc = History.historyList[last];
     }
 })();
+class Scope {
+    static get scope() {
+        return Scope._scope;
+    }
+    static save() {
+        localStorage.setItem("scope", JSON.stringify(Scope._scope));
+    }
+}
+(() => {
+    const scope = localStorage.getItem("scope");
+    if (!kp.Util.isValidObject(scope)) {
+        Scope._scope = {};
+    }
+    else
+        Scope._scope = JSON.parse(scope);
+})();
 let addSpace = "";
 const keyBucket = kp.Display.getInstance("key-bucket");
 let isFirst = true;
 const calcDisplay = kp.Display.getInstance("calc-display");
 const statusDisplay = kp.Display.getInstance("calc-status");
-const jsReleaseMsg = "JS release 2023-03-16 0.15";
+const jsReleaseMsg = "JS release 2023-03-23 0.16";
 //keyBucket.displayText(jsReleaseMsg);
 document.getElementById("javascript-version").innerText = jsReleaseMsg;
 document.getElementById("dark-light-slider").onchange = function (event) {
@@ -235,7 +251,9 @@ function calculate(e) {
     }
     else {
         try {
-            let result = math.evaluate(_evaluateText);
+            //let result = math.evaluate(_evaluateText);
+            let result = math.evaluate(_evaluateText, Scope.scope);
+            Scope.save();
             result = math.format(result, { precision: 14 }); // get rid of ugly numbers like 12.0000000000001
             calcDisplay.displayText(result);
             statusDisplay.displayText("status:okay");
